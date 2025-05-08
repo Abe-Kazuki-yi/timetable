@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS kasukabe_timetable_db.public.users (
 	firstname       VARCHAR(20) NOT NULL,
 	lastname        VARCHAR(20) NOT NULL,
 	password        VARCHAR(50) NOT NULL,
-	role            ROLE DEFAULT 'USER' NOT NULL,
+	role            ROLE DEFAULT 'STUDENT' NOT NULL,
 	grade			VARCHAR(10) NOT NULL,
 	deleted_at TIMESTAMP WITH TIME ZONE,
 	created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
@@ -52,7 +52,7 @@ create table if not exists kasukabe_timetable_db.public.schedule (
 create table if not exists kasukabe_timetable_db.public.not_contact(
 	id              INTEGER PRIMARY KEY,
 	filer_id		VARCHAR(6) NOT NULL,
-	respondent_id   VARCHAR(6) NOT NULL,
+	respondent_id   VARCHAR(6) NOT NULL
 	);
 
 create table if not exists kasukabe_timetable_db.public.runnable (
