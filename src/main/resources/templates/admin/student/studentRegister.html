@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>生徒のスケジュール登録ページ</title>
+</head>
+
+<body>
+	<h1>生徒のスケジュール登録ページです</h1>
+	<p>変更する講座を選んでください</p>
+	<button id="reguler">レギュラー講義</button>
+	<br>
+	<button id="summer">夏期講習</button>
+	<p id="inputText">ここに選択された講座を表示。本当はテーブル。</p>
+	<p id="newButton"></p>
+	<br>
+	<button>戻る</button>
+
+	<script>
+		let regulerDom = document.getElementById("reguler");
+		let summerDom = document.getElementById("summer");
+		let textDom = document.getElementById("inputText");
+		let newButtonDom = document.getElementById("newButton")
+
+		function clickReguler() {
+			textDom.innerHTML = "レギュラー講義の出席可能日を修正します。";
+			newButtonDom.innerHTML = "<button>登録</button>";
+		}
+
+		function clickSummer() {
+			textDom.innerHTML = "夏期講習の出席可能日を修正します。";
+			newButtonDom.innerHTML = "<button>登録</button>";
+		}
+
+		regulerDom.addEventListener("click", clickReguler);
+		summerDom.addEventListener("click", clickSummer);
+
+	</script>
+
+</body>
+
+</html>
