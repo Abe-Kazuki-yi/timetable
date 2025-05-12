@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>生徒のスケジュール表示ページ</title>
+</head>
+
+<body>
+	<h1>生徒のスケジュール表示ページです</h1>
+	<select name = "month" id = "month">
+		<option>2025年4月</option>
+		<option selected>2025年5月</option>
+		<option>2025年6月</option>
+	</select>
+	<p id = "inputText">ここにメッセージを表示</p>
+	
+	<script>
+		let monthDom = document.getElementById("month");
+		let inputTextDom = document.getElementById("inputText");
+		
+		function writeText(){
+			let selectedMonth = monthDom.value;
+			inputTextDom.innerHTML = selectedMonth +"のスケジュールを表示。実際はカレンダー";
+		}
+		monthDom.addEventListener("change", writeText);
+		
+		writeText();
+	</script>
+</body>
+
+</html>
