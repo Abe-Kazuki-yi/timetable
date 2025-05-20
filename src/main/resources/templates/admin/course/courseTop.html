@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>講習トッページ</title>
+</head>
+
+<body>
+	<h1>講習トッページです。</h1>
+	<button id = "newCourse">新規講習</button>
+	<div id = "courseFormat"></div>
+	<label>講習名</label><input type = "text">
+	
+	<script>
+		let newCourseDom = document.getElementById("newCourse");
+		let courseFormatDom = document.getElementById("courseFormat");
+		
+		function setCourse(){
+			courseFormatDom.innerHTML = "";
+		}
+		
+		newCourseDom.addEventListener("click", setCourse);
+	</script>
+</body>
+
+</html>
