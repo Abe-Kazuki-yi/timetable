@@ -2,4 +2,6 @@
 
 !.gitignore
 !frontend
+!frontend/**
 !backend
+!backend/**
