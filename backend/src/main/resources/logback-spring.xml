@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<!-- Spring Bootの色付きログ変換ルールを読み込む -->
+	<include
+		resource="org/springframework/boot/logging/logback/defaults.xml" />
+
+	<!-- 起動時のタイムスタンプを定義 -->
+	<timestamp key="logStartDay" datePattern="yyyy-MM-dd" />
+	<timestamp key="logStartTime" datePattern="yyyy-MM-dd-HHmmss" />
+
+	<!-- コンソール出力（色付き） -->
+	<appender name="CONSOLE"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%-5level) %clr([%thread]){faint} %clr(%logger{36}){cyan} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- ファイル出力（色なし） -->
+	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
+		<file>logs/${logStartDay}/app/app-${logStartTime}.log</file>
+		<append>true</append>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} -
+				%msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<!-- ファイル出力(JSON) -->
+	<appender name="STRUCTURED_FILE" class="ch.qos.logback.core.FileAppender">
+    	<file>logs/${logStartDay}/structured-app/app-${logStartTime}.json</file>
+    	<append>true</append>
+    	<encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+	</appender>
+	
+
+
+	<!-- リクエストにX-Test-Idの宣言があればログに記入。support/TestIdLoggingFilter参照 -->
+	<appender name="SIFT"
+		class="ch.qos.logback.classic.sift.SiftingAppender">
+		<discriminator>
+			<key>testId</key>
+			<defaultValue>default</defaultValue>
+		</discriminator>
+		<sift>
+			<appender name="FILE-${testId}"
+				class="ch.qos.logback.core.FileAppender">
+				<file>logs/${logStartDay}/test/test-${testId}.log</file>
+				<append>true</append>
+				<encoder>
+					<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36}
+						- %msg%n</pattern>
+				</encoder>
+			</appender>
+		</sift>
+	</appender>
+	
+	<!-- TestIdのログ(JSON) -->
+	<appender name="STRUCTURED_SIFT" class="ch.qos.logback.classic.sift.SiftingAppender">
+    	<discriminator>
+        	<key>testId</key>
+        	<defaultValue>default</defaultValue>
+    	</discriminator>
+    	<sift>
+        	<appender name="STRUCTURED_FILE-${testId}" class="ch.qos.logback.core.FileAppender">
+            	<file>logs/${logStartDay}/structured-test/test-${testId}.json</file>
+            	<append>true</append>
+            	<encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+        	</appender>
+    	</sift>
+	</appender>
+	
+
+	<!-- ルートロガーに両方のAppenderを紐づけ -->
+	<root level="Info">
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+		<appender-ref ref="SIFT" />
+		<appender-ref ref="STRUCTURED_FILE" />
+    	<appender-ref ref="STRUCTURED_SIFT" />
+	</root>
+
+</configuration>
