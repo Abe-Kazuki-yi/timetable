@@ -1,0 +1,14 @@
+{
+  "appName": "TimeTable Manager",
+  "version": "1.0.0",
+  "defaultSettings": {
+    "theme": "light",
+    "language": "ja",
+    "timezone": "Asia/Tokyo"
+  },
+  "features": {
+    "timetable": true,
+    "calendar": true,
+    "notifications": true
+  }
+} 
