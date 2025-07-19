@@ -1,18 +1,26 @@
+'use client'
+
 import "./globals.css";
 import { Inconsolata } from 'next/font/google'
 import type { ReactNode } from "react";
-import Test from "@/components/Test";
+import Test from "@/components/test";
+import { useEffect } from 'react';
+import useConfigStore from '@/store/confingStore';
 
 //Googleフォントを有効化
 const font = Inconsolata({ subsets: ['latin']});
 
-//メタデータを定義
-export const metadata ={
-  title: 'timetable manager',
-  description: '生徒と教師で授業をマッチングするためのアプリ',
-}
-
 export default function RootLayout({ children }: { children: ReactNode }){
+
+const setConfig = useConfigStore((state) => state.setConfig);
+
+  useEffect(() => {
+    // 環境変数を Store に保存
+    setConfig({
+      xTestId: process.env.NEXT_PUBLIC_DEFAULT_TEST_ID || '',
+    });
+  }, [setConfig]);
+
   return (
 
 <html lang="ja">

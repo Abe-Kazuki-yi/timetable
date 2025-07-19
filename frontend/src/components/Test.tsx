@@ -2,11 +2,13 @@
 
 import { getProgressFromDay } from "@/lib/getter";
 import { useState } from "react";
+import useConfigStore from "@/store/confingStore";
 
 export default function Test() {
   const [inputDay, setInputDay] = useState("");
   const [progress, setProgress] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const {xTestId} = useConfigStore();
 
   const handleClick = async () => {
     try {
@@ -21,6 +23,7 @@ export default function Test() {
 
   return (
     <div>
+      <p>xTestId: {xTestId}</p>
       <label>
         日付を入力してください：
         <input
